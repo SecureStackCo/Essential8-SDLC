@@ -32,7 +32,6 @@ In a web based world the most common way that humans interact with the internet 
 **Implications for SDLC:**
 
 This control is all about defining what applications can run on computers that affect the company.  The language specifically calls out “servers and workstations” but really any compute that is owned by, managed by, or affects the production of an orgs systems is in scope.  This section here expands the scope of this section dramatically:  **“Allowed and blocked executions are centrally logged and protected from unauthorised modification and deletion, monitored for signs of compromise, and actioned when cyber security events are detected**
-.
 
 **Controls:**
 
@@ -43,11 +42,11 @@ This control is all about defining what applications can run on computers that a
 
 Web applications are collections of technologies bundled together as a "stack".  This "stack" involves multiple components some of which the application developers control and some that they don't.  For those parts of the application that they **DO** control, they should make sure that they are patching and updating those components frequently.
 
-Implications for SDLC:
+**Implications for SDLC:**
 
 This section is ostensibly about patching applications, but really is expanded, especially in the highest maturity model, to include identifying vulnerabilities.
 
-Controls:
+**Controls:**
 
 1. Web vulnerability analysis is enabled for public facing services
 2. Out of date, insecure or malicious web components are patched or removed
@@ -66,11 +65,11 @@ Because the vast majority of applications that users interact with are delivered
 
 Because many InfoSec professionals don’t yet understand how different modern web applications are build and run, they over index on old server side technologies and ignore the most common attack vectors.
 
-Implications for the SDLC:
+**Implications for SDLC:**
 
 The core of this section is protecting the browser experience and should be expanded to *all* browser protections including CSP, HSTS, and other controls that are delivered with a HTTP response header.  Further, this section should cover TLS/SSL and making sure that the comms a browser uses are forced to be private and secure.
 
-Controls:
+**Controls:**
 
 1. Enforce end to end encryption on all communication in transit.  Certificate, redirects,
 2. Use modern and secure TLS version
@@ -81,11 +80,11 @@ Controls:
 
 Modern web applications and SaaS solutions allow users to authenticate to use the functionality therein.  This authentication decides if the user can log in, but it does not decided what the user can access which is a function of authorization.  Authentication and authorization are two different things but in many SaaS solutions there is no differentiation of users or the role that users provide.  So, it’s an important part of the Essential 8 AppSec strategy to determine if a web app has the ability to give users different levels of access via a role or similar method.  If they don't then there is no way to restrict administrative privileges.
 
-Implications for SDLC:
+**Implications for SDLC:**
 
 Least permission needs to be applied everywhere.  This includes on obvious places covered in the original Essential 8 like servers and the users desktop, but also in the CI/CD and build processes, cloud environments, and in the access controls in the web applications that our customers use.
 
-Controls:
+**Controls:**
 
 1. Development, testing, and operational environments shall be separated to reduce the risks of unauthorized access or changes to the operational environment
 2. Explicit User and group/teams access is applied to source code repository
@@ -96,11 +95,11 @@ Controls:
 
 The underlying operating system beneath an application is often thought of out of the control of the application developers.  If the stack that the development team are using means that a server and its operating system are managed by them, then they need to make sure that the OS is patched and updated frequently.  Typically in a cloud context the use of IaaS means that the OS is self managed, but in the context of PaaS and SaaS the OS is managed by the hosting provider.   Applications built using IaaS or similar means that the relationship of other tech stack components.
 
-Implications for SDLC:
+**Implications for SDLC:**
 
 This section is ostensibly about patching operating systems, but really is expanded, especially in the highest maturity model, to include identifying vulnerabilities in operating systems wherever they are used.  This includes physical or virtualized servers, compute environments for containers and CI/CD or build environments.
 
-Controls:
+**Controls:**
 
 1. System vulnerability analysis is enabled for all servers
 2. Out of date, insecure or malicious operating system components are patched or removed
@@ -112,11 +111,11 @@ Controls:
 
 Multi-factor authentication (MFA) is the single greatest security control you can add to an application environment to protect the user and their data.  MFA is relatively easy to integrate into modern web applications, as well as infrastructure platforms and cloud providers.  If sensitive data of any kind is housed in your applications you should enforce MFA for all of your users.
 
-Implications for SDLC:
+**Implications for SDLC:**
 
  There are several ways to embed MFA into the SDLC that are easy and accessible for both developers and the end users.
 
-Controls:
+**Controls:**
 
 1. MFA should be enabled by default for any web applications that store sensitive data.
 2. MFA should be enabled for all source code management processes including git push, and pull requests.
@@ -127,11 +126,11 @@ Controls:
 
 Backups are the single most important thing that a company can do to make themselves more resilient.   Backups should occur for all important parts of the environment.
 
-Implications for SDLC:
+**Implications for SDLC:**
 
 Source code is the crown jewels of any companies intellectual portfolio assets.  So, making sure that source code, and the way to deploy it is backed up is important.
 
-Controls:
+**Controls:**
 
 1. All source code is version controlled using standard version controlled systems (VCS)
 2. All important credentials are stored in resilient storage system
