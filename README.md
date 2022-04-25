@@ -12,10 +12,10 @@ The Essential 8 is an Australian security document published and maintained by t
 
 As a general set of high-level guidelines these are great and can be applied to many important computing environments.  
 
-Unfortunately, the Essential 8 is typically interpreted in the context of a Windows based client server networking environment. In the descriptions within appendices A-D there is an obvious emphasis on Microsoft tooling for both server and desktop environments. In fact, the opening paragraph of the document goes so far as to say: “The Essential Eight are designed to protect Microsoft Windows-based internet-connected networks”. To provide evidence the word "Microsoft" is mentioned 77 times in the document. This would make some sense if this document was written to specifically address desktop hardening steps, but that's not the case.  Servers, network devices and internet facing services are also explictly mentioned many times.   
+Unfortunately, the Essential 8 is typically interpreted in the context of a Windows based client server networking environment. In the descriptions within appendices A-D there is an obvious emphasis on Microsoft tooling for both server and desktop environments. In fact, the opening paragraph of the document goes so far as to say: “The Essential Eight are designed to protect Microsoft Windows-based internet-connected networks”. To provide context the word "Microsoft" is mentioned 77 times in the document. This would make some sense if this document was written to specifically address desktop hardening steps, but that's not the case.  Servers, network devices and "internet-facing services" are also explictly mentioned many times.   
 
 ### The evolution of the Essential 8
-Even with those failings, the team at SecureStack realized that you could think about many of the mitigation techniques mentioned in this document with a different context and focus.  Especially when you take into account the reality of where most of the worlds "public facing services" are running. This new context is focused on the most common way that humans use computers in the twenty-first century: web applications   If we apply the high level concepts in the Essential 8 to how we build, test, deploy, run and maintain web applications, we can begin to secure the way that users are actually interacting with software.
+Even with those failings, the team at SecureStack realized that you could think about many of the mitigation techniques mentioned in this document with a different context and focus.  Especially when you take into account the reality of where most of the worlds "internet-facing services" are running. This new context is focused on the most common way that humans use computers in the twenty-first century: web applications   If we apply the high level concepts in the Essential 8 to how we build, test, deploy, run and maintain web applications, we can begin to secure the way that users are actually interacting with software.
 
 As client use moves away from a dedicated desktop experience towards a web enabled one this new focus and interpretation of the Essential 8 becomes even more important.   We are not in 2005 after all, so it is time for the Essential 8 to evolve, and we aim to help it do just that with this document.
 
@@ -48,7 +48,7 @@ This section is ostensibly about patching applications, but really is expanded, 
 
 **Controls:**
 
-1. Web vulnerability analysis is enabled for public facing services
+1. Web vulnerability analysis is enabled for internet-facing services
 2. Out of date, insecure or malicious web components are patched or removed
 3. Un-needed libraries, frameworks and components are removed
 4. All CI/CD environments use up to date applications
