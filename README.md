@@ -11,7 +11,7 @@ The [Essential 8](https://www.cyber.gov.au/acsc/view-all-content/essential-eight
 * [Multi-Factor Authentication](#mfa)
 * [Regular Backups](#backups)
 
-The E8 helps with securing standard enterprise setups. But software development is anything but standard. We at SafeStack believe the underlying principles can be adapted to software development. This document will help introduce SSDLC concepts for each control.
+The E8 helps with securing standard enterprise setups. But software development is anything but standard. We at SecureStack believe the underlying principles can be adapted to software development. This document will help introduce SSDLC concepts for each control.
 
 ## Background
 
