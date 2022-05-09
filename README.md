@@ -1,5 +1,6 @@
 # Essential 8 and the Software Development Lifecycle (SDLC)
-The Essential 8 is an Australian security document published and maintained by the Australian Cyber Security Centre, which is part of the Australian Signals Directorate (ASD).  The “Essential 8” refers to 8 mitigation strategies which are:
+
+The [Essential 8](https://www.cyber.gov.au/acsc/view-all-content/essential-eight) was established from ASD's experience dealing with cyber intrusions. ASD mostly operate in government and enterprise sectors. These sectors are usually Microsoft environments, and the Essential 8 reflect this. The Essential 8 are:
 
 * [Application Control](#application-control)
 * [Patch Applications](#patch-applications)
@@ -10,20 +11,29 @@ The Essential 8 is an Australian security document published and maintained by t
 * [Multi-Factor Authentication](#mfa)
 * [Regular Backups](#backups)
 
-As a general set of high-level guidelines these are great and can be applied to many important computing environments.  
+The E8 helps with securing standard enterprise setups. But software development is anything but standard. We at SecureStack believe the underlying principles can be adapted to software development. This document will help introduce SSDLC concepts for each control.
 
-Unfortunately, the Essential 8 is typically interpreted in the context of a Windows based client server networking environment. In the descriptions within appendices A-D there is an obvious emphasis on Microsoft tooling for both server and desktop environments. In fact, the opening paragraph of the document goes so far as to say: “The Essential Eight are designed to protect Microsoft Windows-based internet-connected networks”. The word "Microsoft" is mentioned 77 times throughout the document. This would make some sense if this document was written to specifically address desktop hardening steps, but that's not the case.  Servers, network devices and "internet-facing services" are also explictly mentioned many times.   
+## Background
 
-### The evolution of the Essential 8
-Even with those failings, the team at SecureStack realized that these 8 high-level concepts could also be applied to the software development lifecycle (SDLC) as a way to address software supply chain challenges we now face.  This is especially true when you account for the reality of where most of the worlds "internet-facing services" are running.  This new context is focused on the most common way that humans use computers in the twenty-first century: web applications.   If we apply the high level concepts in the Essential 8 to how we build, test, deploy, run and maintain web applications, we can begin to secure the way that users are actually interacting with software.
-
-As client use moves away from a dedicated desktop experience towards a web enabled one this new focus and interpretation of the Essential 8 becomes even more important.   We are not in 2005 after all, so it is time for the Essential 8 to evolve, and we aim to help it do just that with this document.
+Software development has changed. The Essential Eight was written in a world where C#, MVC, VMWare, and dedicated on-premise windows hosts were the norm. Today, cloud environments are the default, DevOps is standard practice, JavaScript runs everything, and Users operate primarily through a web browser. We are not debating whether E8 is effective, but we are introducing ways to make it relevant. For a software engineering world.
 
 **So, what follows are the Essential 8 mitigations reframed in this new modern, web context.**
 
-<h3 id="application-control">1. Application Control</h2>
+**We need to consider two contexts, the Browser, and the Server**
 
-In a web based world the most common way that humans interact with the internet is through a modern web browser.  The browser is a conduit between the unfiltered internet and the user.  In this context the best way to manage the security of the end user is through the browser itself.  This is also the only way that a administrators can decide what applications can run and what technologies are allowed.
+<h2 id="application-control">1. Application Control</h2>
+
+Users interact with web applications through the browser. Browsers give tremendous freedom to users, across a multitude of devices, and in a consistent but tailored experience. The browser is king, and adversaries know that. 
+
+Application Control prevents the execution of applications that haven't explicitly been allowed to. It can specify which browsers are okay, their versions, their plugins, and more. As a desktop administrator, we can control this but we cannot easily control the interpretation of data received by the browser.
+
+As a software engineer though, we can help browsers safely interpret content to protect our users.
+
+1. Introduce Subresource Integrity > Application Control of JavaScript Libraries
+2. Introduce a Content-Security-Policy > Application Control of Remotely Served Content
+3. Use the Sanitizer API > Application Control of Locally Server Content
+
+By adopting these controls, we are controlling what can execute in a browser. Subresource Integrity only allows execution of content if the hash matches. This prevents execution of libraries with tampered content. Content-Security Policies specify what type of content can execute, and where that content can come from. If used with the strict-dynamic property, you can prevent execution of content from sources outside what you specify. Finally, if you send all received content to the Sanitiser API that is being built into browsers as this is written, you can prevent browsers from executing content by only allowing safe characters and safe markup.
 
 **Implications for SDLC:**
 
@@ -34,7 +44,7 @@ This control is all about defining what applications can run on computers that a
 1. Are applications logging all access, good or bad, to a central place?
 2. Has your org defined and limited what can run in your CI/CD?  Each one of these steps is a binary and has unlimited access to the internet.  Do you have controls around this?
 
-<h3 id="patch-applications">2. Patch Applications</h2>
+<h2 id="patch-applications">2. Patch Applications</h2>
 
 Web applications are collections of technologies bundled together as a "stack".  This "stack" involves multiple components some of which the application developers control and some that they don't.  For those parts of the application that they **DO** control, they should make sure that they are patching and updating those components frequently.
 
@@ -72,7 +82,7 @@ The core of this section is protecting the browser experience and should be expa
 3. Create a customized Content Security Policy (CSP)
 4. Remove all out of date, insecure and malicious web components, frameworks and libraries
 
-<h3 id="restrict-admin">5. Restrict administrative privileges</h2>
+<h2 id="restrict-admin">5. Restrict administrative privileges</h2>
 
 Modern web applications and SaaS solutions allow users to authenticate to use the functionality therein.  This authentication decides if the user can log in, but it does not decided what the user can access which is a function of authorization.  Authentication and authorization are two different things but in many SaaS solutions there is no differentiation of users or the role that users provide.  So, it’s an important part of the Essential 8 AppSec strategy to determine if a web app has the ability to give users different levels of access via a role or similar method.  If they don't then there is no way to restrict administrative privileges.
 
@@ -85,9 +95,8 @@ Least permission needs to be applied everywhere.  This includes on obvious place
 1. Development, testing, and operational environments shall be separated to reduce the risks of unauthorized access or changes to the operational environment
 2. Explicit User and group/teams access is applied to source code repository
 3. Explicit user and group/teams permission is applied to cloud resources
-4.
 
-<h3 id="patch-os">6. Patch Operating Systems</h2>
+<h2 id="patch-os">6. Patch Operating Systems</h2>
 
 The underlying operating system beneath an application is often thought of out of the control of the application developers.  If the stack that the development team are using means that a server and its operating system are managed by them, then they need to make sure that the OS is patched and updated frequently.  Typically in a cloud context the use of IaaS means that the OS is self managed, but in the context of PaaS and SaaS the OS is managed by the hosting provider.   Applications built using IaaS or similar means that the relationship of other tech stack components.
 
@@ -103,7 +112,7 @@ This section is ostensibly about patching operating systems, but really is expan
 4. All container environments use up to date and patched
 5. All compute environments are automated using IaaC or similar so that latest and most secure OS versions are being deployed
 
-<h3 id="mfa">7. Multi-factor authentication</h2>
+<h2 id="mfa">7. Multi-factor authentication</h2>
 
 Multi-factor authentication (MFA) is the single greatest security control you can add to an application environment to protect the user and their data.  MFA is relatively easy to integrate into modern web applications, as well as infrastructure platforms and cloud providers.  If sensitive data of any kind is housed in your applications you should enforce MFA for all of your users.
 
@@ -118,7 +127,7 @@ Multi-factor authentication (MFA) is the single greatest security control you ca
 3. MFA should be enabled for all important third party dependencies like identity access providers (IDP), cloud resources, and logging platforms.
 4. All anomalous MFA events are logged and sent to central logging platform
 
-<h3 id="backups">8. Regular Backups</h2>
+<h2 id="backups">8. Regular Backups</h2>
 
 Backups are the single most important thing that a company can do to make themselves more resilient.   Backups should occur for all important parts of the environment.
 
@@ -133,7 +142,8 @@ Source code is the crown jewels of any companies intellectual portfolio assets. 
 3. The build and deploy processes should be version controlled using VCS
 4. Secure infrastructure should be version controlled using VCS  
 
-### Essential 8 mapping to ISM 
+### Essential 8 mapping to ISM
+
 ------
 
 | Mitigation Strategy | Maturity Level Two | Maturity Level Three | SDLC |
@@ -147,10 +157,9 @@ Source code is the crown jewels of any companies intellectual portfolio assets. 
 | Multi-factor authentication | 1504, 1679, 1680, 1681, 1173, 1401, 1683 | 1504, 1679, 1680, 1681, 1173, 1505, 1401, 1682, 1683, 1684 | 1546 |
 | Regular backups | 1511, 1515, 1705, 1707 | 1511, 1515, 1705, 1706, 1707, 1708 | 1419 |
 
+### Sponsors
 
-### Sponsors 
 ------
 
 Sponsored with 💜  by
 <a href="https://securestack.com" target=”_blank” rel="noopener noreferrer"><center><img src="https://securestack.com/wp-content/uploads/2021/09/securestack-horizontal.png" width="500"/></center></a>
-
