@@ -142,9 +142,7 @@ Source code is the crown jewels of any companies intellectual portfolio assets. 
 3. The build and deploy processes should be version controlled using VCS
 4. Secure infrastructure should be version controlled using VCS  
 
-### Essential 8 mapping to ISM
-
-------
+### Essential 8 mapping to ISM mapped to SDLC
 
 | Mitigation Strategy | Maturity Level Two | Maturity Level Three | SDLC |
 | :--- | :---   | :---   | :---   |
